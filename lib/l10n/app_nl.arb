@@ -1,0 +1,11 @@
+{
+    "appTitle": "Weer",
+    "temperature": "Temperatuur",
+    "minimum": "Minimum",
+    "maximum": "Maximum",
+    "average": "Gemiddelde",
+    "dewPoint": "Dauwpunt",
+    "humidity": "Luchtvochtigheid",
+    "airPressure": "Luchtdruk",
+    "checkWeatherStatsTooltip": "Controleer of nieuwe waarden beschikbaar zijn."
+}

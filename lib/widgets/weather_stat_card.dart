@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../models/weather_stat.dart';
 import '../view_models/weather_view_model.dart';
@@ -74,17 +75,17 @@ class _WeatherStatCard extends State<WeatherStatCard> {
                     return StaggeredGrid.count(
                       crossAxisCount: 2,
                       children: [
-                        const Text('Minimum:'),
+                        Text("${AppLocalizations.of(context)!.minimum}:"),
                         Text(
                           widget.weatherStat == null ? "N/A" : "${widget.weatherStat!.minValue.toStringAsFixed(1)}${widget.unit}",
                           textAlign: TextAlign.end,
                         ),
-                        const Text('Average:'),
+                        Text("${AppLocalizations.of(context)!.average}:"),
                         Text(
                           widget.weatherStat == null ? "N/A" :  "${widget.weatherStat!.averageValue.toStringAsFixed(1)}${widget.unit}",
                           textAlign: TextAlign.end,
                         ),
-                        const Text('Maximum:'),
+                        Text("${AppLocalizations.of(context)!.maximum}:"),
                         Text(
                           widget.weatherStat == null ? "N/A" : "${widget.weatherStat!.maxValue.toStringAsFixed(1)}${widget.unit}",
                           textAlign: TextAlign.end,

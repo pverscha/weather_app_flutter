@@ -1,0 +1,11 @@
+{
+    "appTitle": "Weather",
+    "temperature": "Temperature",
+    "minimum": "Minimum",
+    "maximum": "Maximum",
+    "average": "Average",
+    "dewPoint": "Dew point",
+    "humidity": "Humidity",
+    "airPressure": "Air pressure",
+    "checkWeatherStatsTooltip": "Check for new weather stats."
+}

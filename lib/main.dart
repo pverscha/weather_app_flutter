@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nice_weather/view_models/weather_view_model.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'widgets/weather_stat_card.dart';
 
@@ -18,12 +19,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Weather',
+      title: "Weather",
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Weather'),
+      home: MyHomePage(title: "Weather"),
     );
   }
 }
@@ -67,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Provider.of<WeatherViewModel>(context, listen: false)
                     .refreshWeatherValues();
               },
-              tooltip: 'Check for new weather stats.',
+              tooltip: AppLocalizations.of(context)!.checkWeatherStatsTooltip,
             )
           ]
         ),
@@ -75,25 +78,25 @@ class _MyHomePageState extends State<MyHomePage> {
           return ListView(
             children: [
               WeatherStatCard(
-                  title: 'Temperature',
+                  title: AppLocalizations.of(context)!.temperature,
                   unit: '°C',
                   icon: Icons.thermostat,
                   weatherStat: weather.temperatureStat
               ),
               WeatherStatCard(
-                  title: 'Dewpoint',
+                  title: AppLocalizations.of(context)!.dewPoint,
                   unit: '°C',
                   icon: Icons.dew_point,
                   weatherStat: weather.dewpointStat
               ),
               WeatherStatCard(
-                  title: 'Humidity',
+                  title: AppLocalizations.of(context)!.humidity,
                   unit: '%',
                   icon: Icons.snowing,
                   weatherStat: weather.humidityStat
               ),
               WeatherStatCard(
-                  title: 'Air pressure',
+                  title: AppLocalizations.of(context)!.airPressure,
                   unit: 'hPa',
                   icon: Icons.air,
                   weatherStat: weather.pressureStat
