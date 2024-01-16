@@ -7,5 +7,6 @@
     "dewPoint": "Dauwpunt",
     "humidity": "Luchtvochtigheid",
     "airPressure": "Luchtdruk",
-    "checkWeatherStatsTooltip": "Controleer of nieuwe waarden beschikbaar zijn."
+    "checkWeatherStatsTooltip": "Controleer of nieuwe waarden beschikbaar zijn.",
+    "updatingWeatherStatsSnackBar": "Weerinformatie wordt bijgewerkt..."
 }

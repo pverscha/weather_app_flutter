@@ -7,5 +7,6 @@
     "dewPoint": "Dew point",
     "humidity": "Humidity",
     "airPressure": "Air pressure",
-    "checkWeatherStatsTooltip": "Check for new weather stats."
+    "checkWeatherStatsTooltip": "Check for new weather stats.",
+    "updatingWeatherStatsSnackBar": "Updating weather stats..."
 }

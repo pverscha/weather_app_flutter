@@ -67,6 +67,12 @@ class _MyHomePageState extends State<MyHomePage> {
             IconButton(
               icon: const Icon(Icons.refresh),
               onPressed: () {
+                var refreshSnackBar = SnackBar(
+                  content: Text(AppLocalizations.of(context)!.updatingWeatherStatsSnackBar)
+                );
+
+                ScaffoldMessenger.of(context).showSnackBar(refreshSnackBar);
+
                 Provider.of<WeatherViewModel>(context, listen: false)
                     .refreshWeatherValues();
               },
@@ -75,34 +81,38 @@ class _MyHomePageState extends State<MyHomePage> {
           ]
         ),
         body: Consumer<WeatherViewModel>(builder: (context, weather, child) {
-          return ListView(
-            children: [
-              WeatherStatCard(
-                  title: AppLocalizations.of(context)!.temperature,
-                  unit: '°C',
-                  icon: Icons.thermostat,
-                  weatherStat: weather.temperatureStat
-              ),
-              WeatherStatCard(
-                  title: AppLocalizations.of(context)!.dewPoint,
-                  unit: '°C',
-                  icon: Icons.dew_point,
-                  weatherStat: weather.dewpointStat
-              ),
-              WeatherStatCard(
-                  title: AppLocalizations.of(context)!.humidity,
-                  unit: '%',
-                  icon: Icons.snowing,
-                  weatherStat: weather.humidityStat
-              ),
-              WeatherStatCard(
-                  title: AppLocalizations.of(context)!.airPressure,
-                  unit: 'hPa',
-                  icon: Icons.air,
-                  weatherStat: weather.pressureStat
-              )
-            ],
-          );
+          if (weather.temperatureStat == null) {
+            return const CircularProgressIndicator();
+          } else {
+            return ListView(
+              children: [
+                WeatherStatCard(
+                    title: AppLocalizations.of(context)!.temperature,
+                    unit: '°C',
+                    icon: Icons.thermostat,
+                    weatherStat: weather.temperatureStat
+                ),
+                WeatherStatCard(
+                    title: AppLocalizations.of(context)!.dewPoint,
+                    unit: '°C',
+                    icon: Icons.dew_point,
+                    weatherStat: weather.dewpointStat
+                ),
+                WeatherStatCard(
+                    title: AppLocalizations.of(context)!.humidity,
+                    unit: '%',
+                    icon: Icons.snowing,
+                    weatherStat: weather.humidityStat
+                ),
+                WeatherStatCard(
+                    title: AppLocalizations.of(context)!.airPressure,
+                    unit: 'hPa',
+                    icon: Icons.air,
+                    weatherStat: weather.pressureStat
+                )
+              ],
+            );
+          }
         }));
   }
 }
