@@ -1,34 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:provider/provider.dart';
 
-class SettingsPage extends StatefulWidget {
-  SettingsPage({super.key});
+import '../view_models/settings_view_model.dart';
 
-  @override
-  State<SettingsPage> createState() => _SettingsPageState();
-}
-
-class _SettingsPageState extends State<SettingsPage> {
-  bool _useMetricsSwitch = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _loadSettings();
-  }
-
-  _loadSettings() async {
-    final prefs = await SharedPreferences.getInstance();
-    setState(() => _useMetricsSwitch = prefs.getBool('useMetricUnits') ?? false);
-  }
-
-  _onToggleMetricSwitch(bool useMetricSystem) async {
-    final prefs = await SharedPreferences.getInstance();
-    setState(() {
-      _useMetricsSwitch = useMetricSystem;
-      prefs.setBool('useMetricUnits', _useMetricsSwitch);
-    });
+class SettingsPage extends StatelessWidget {
+  _onToggleMetricSwitch(BuildContext context, bool useMetricSystem) async {
+    var settingsProvider = Provider.of<SettingsViewModel>(context, listen: false);
+    var currentSettings = settingsProvider.settings;
+    currentSettings!.useMetricUnits = useMetricSystem;
+    settingsProvider.updateSettings(currentSettings);
   }
 
   @override
@@ -38,12 +19,18 @@ class _SettingsPageState extends State<SettingsPage> {
             backgroundColor: Theme.of(context).colorScheme.inversePrimary,
             title: Text(AppLocalizations.of(context)!.settingsPageTitle)
         ),
-        body: SwitchListTile(
-          value: _useMetricsSwitch,
-          onChanged: _onToggleMetricSwitch,
-          title: Text(AppLocalizations.of(context)!.localizationSettingTitle),
-          subtitle: Text(AppLocalizations.of(context)!.metricSwitchToggleDescription)
-        )
+        body: Consumer<SettingsViewModel>(builder: (context, settings, child) {
+          if (settings.settings == null) {
+            return Center(child: new CircularProgressIndicator());
+          } else {
+            return SwitchListTile(
+                value: settings.settings!.useMetricUnits,
+                onChanged: (val) => _onToggleMetricSwitch(context, val),
+                title: Text(AppLocalizations.of(context)!.localizationSettingTitle),
+                subtitle: Text(AppLocalizations.of(context)!.metricSwitchToggleDescription)
+            );
+          }
+        })
     );
   }
 }

@@ -1,7 +1,4 @@
-import 'dart:developer';
-import 'dart:io';
-
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import '../models/weather_stat.dart';
 import '../services/weather_service.dart';

@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:nice_weather/utils/unit_conversions.dart';
+import 'package:nice_weather/view_models/settings_view_model.dart';
 import 'package:nice_weather/view_models/weather_view_model.dart';
 import 'package:nice_weather/views/settings_page.dart';
+import 'package:nice_weather/widgets/air_pressure_stat_card.dart';
+import 'package:nice_weather/widgets/temperature_stat_card.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'widgets/weather_stat_card.dart';
 
 void main() {
-  runApp(ChangeNotifierProvider(
-    create: (context) => WeatherViewModel(),
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (context) => WeatherViewModel()),
+      ChangeNotifierProvider(create: (context) => SettingsViewModel())
+    ],
     child: const MyApp(),
   ));
 }
@@ -97,15 +104,12 @@ class _MyHomePageState extends State<MyHomePage> {
           } else {
             return ListView(
               children: [
-                WeatherStatCard(
+                TemperatureStatCard(
                     title: AppLocalizations.of(context)!.temperature,
-                    unit: '°C',
-                    icon: Icons.thermostat,
                     weatherStat: weather.temperatureStat
                 ),
-                WeatherStatCard(
+                TemperatureStatCard(
                     title: AppLocalizations.of(context)!.dewPoint,
-                    unit: '°C',
                     icon: Icons.dew_point,
                     weatherStat: weather.dewpointStat
                 ),
@@ -115,10 +119,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     icon: Icons.snowing,
                     weatherStat: weather.humidityStat
                 ),
-                WeatherStatCard(
+                AirPressureStatCard(
                     title: AppLocalizations.of(context)!.airPressure,
-                    unit: 'hPa',
-                    icon: Icons.air,
                     weatherStat: weather.pressureStat
                 )
               ],

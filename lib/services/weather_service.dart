@@ -19,27 +19,24 @@ class WeatherService {
       String averageKey,
       String minKey,
       String maxKey,
-      [double Function(double)? transformation]
   ) async {
-    transformation = transformation ?? (double val) => val;
-
     var parsedResponse = await _retrieveMostRecentAPIResponse();
 
     return WeatherStat(
-        transformation(parsedResponse[currentKey].toDouble()),
-        transformation(parsedResponse[averageKey].toDouble()),
-        transformation(parsedResponse[minKey].toDouble()),
-        transformation(parsedResponse[maxKey].toDouble()),
+        parsedResponse[currentKey].toDouble(),
+        parsedResponse[averageKey].toDouble(),
+        parsedResponse[minKey].toDouble(),
+        parsedResponse[maxKey].toDouble(),
         DateTime.fromMicrosecondsSinceEpoch(parsedResponse['dateTime'] as int)
     );
   }
 
   Future<WeatherStat> retrieveCurrentTemperature() async {
-    return await _retrieveWeatherStat('outTemp', 'averageTemp', 'minTemp', 'maxTemp', fahrenheitToCelsius);
+    return await _retrieveWeatherStat('outTemp', 'averageTemp', 'minTemp', 'maxTemp');
   }
 
   Future<WeatherStat> retrieveCurrentDewpoint() async {
-    return await _retrieveWeatherStat('dewpoint', 'averageDewpoint', 'minDewpoint', 'maxDewpoint', fahrenheitToCelsius);
+    return await _retrieveWeatherStat('dewpoint', 'averageDewpoint', 'minDewpoint', 'maxDewpoint');
   }
 
   Future<WeatherStat> retrieveCurrentHumidity() async {
@@ -47,6 +44,6 @@ class WeatherService {
   }
 
   Future<WeatherStat> retrievePressure() async {
-    return await _retrieveWeatherStat('airPressure', 'averageAirPressure', 'minAirPressure', 'maxAirPressure', convertInHgToHpa);
+    return await _retrieveWeatherStat('airPressure', 'averageAirPressure', 'minAirPressure', 'maxAirPressure');
   }
 }
