@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nice_weather/view_models/weather_view_model.dart';
+import 'package:nice_weather/views/settings_page.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -50,6 +51,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -82,7 +91,9 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         body: Consumer<WeatherViewModel>(builder: (context, weather, child) {
           if (weather.temperatureStat == null) {
-            return const CircularProgressIndicator();
+            return const Center(
+              child: CircularProgressIndicator()
+            );
           } else {
             return ListView(
               children: [
@@ -113,6 +124,46 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             );
           }
-        }));
+        }
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.inversePrimary,
+              ),
+              child: Text('Weather App'),
+            ),
+            ListTile(
+              title: const Text('Home'),
+              selected: _selectedIndex == 0,
+              onTap: () {
+                // Update the state of the app
+                _onItemTapped(0);
+                // Then close the drawer
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text(AppLocalizations.of(context)!.settingsPageTitle),
+              selected: _selectedIndex == 1,
+              onTap: () {
+                // Update the state of the app
+                _onItemTapped(1);
+                // Then close the drawer
+                Navigator.pop(context);
+                // Then navigate to the settings page
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SettingsPage())
+                );
+              },
+            )
+          ]
+        )
+      )
+    );
   }
 }

@@ -8,5 +8,9 @@
     "humidity": "Humidity",
     "airPressure": "Air pressure",
     "checkWeatherStatsTooltip": "Check for new weather stats.",
-    "updatingWeatherStatsSnackBar": "Updating weather stats..."
+    "updatingWeatherStatsSnackBar": "Updating weather stats...",
+    "settingsPageTitle": "settings",
+    "localizationSettingTitle": "Localization",
+    "metricSwitchToggleTitle": "Convert units to metric",
+    "metricSwitchToggleDescription": "If switched on, metric units (Celsius, hPa, ...) will be used throughout the application."
 }

@@ -35,7 +35,7 @@ class _WeatherStatCard extends State<WeatherStatCard> {
   Widget build(BuildContext context) {
     return Card(
         child: Padding(
-          padding: const EdgeInsets.only(top: 12.0, left: 12.0, right: 12.0),
+          padding: const EdgeInsets.all(12.0),
           child: Column(
             children: [
               Row(

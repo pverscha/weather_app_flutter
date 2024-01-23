@@ -8,5 +8,9 @@
     "humidity": "Luchtvochtigheid",
     "airPressure": "Luchtdruk",
     "checkWeatherStatsTooltip": "Controleer of nieuwe waarden beschikbaar zijn.",
-    "updatingWeatherStatsSnackBar": "Weerinformatie wordt bijgewerkt..."
+    "updatingWeatherStatsSnackBar": "Weerinformatie wordt bijgewerkt...",
+    "settingsPageTitle": "Instellingen",
+    "localizationSettingTitle": "Eenheden en metrieken",
+    "metricSwitchToggleTitle": "Gebruik metrische eenheden",
+    "metricSwitchToggleDescription": "Converteer eenheden automatisch naar het metrische systeem (Celsius, hPa, ...)."
 }
