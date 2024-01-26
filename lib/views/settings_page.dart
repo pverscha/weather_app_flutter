@@ -21,13 +21,17 @@ class SettingsPage extends StatelessWidget {
         ),
         body: Consumer<SettingsViewModel>(builder: (context, settings, child) {
           if (settings.settings == null) {
-            return Center(child: new CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else {
-            return SwitchListTile(
-                value: settings.settings!.useMetricUnits,
-                onChanged: (val) => _onToggleMetricSwitch(context, val),
-                title: Text(AppLocalizations.of(context)!.localizationSettingTitle),
-                subtitle: Text(AppLocalizations.of(context)!.metricSwitchToggleDescription)
+            return Column(
+              children: [
+                SwitchListTile(
+                    value: settings.settings!.useMetricUnits,
+                    onChanged: (val) => _onToggleMetricSwitch(context, val),
+                    title: Text(AppLocalizations.of(context)!.localizationSettingTitle),
+                    subtitle: Text(AppLocalizations.of(context)!.metricSwitchToggleDescription)
+                ),
+              ],
             );
           }
         })
